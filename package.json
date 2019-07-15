@@ -1,0 +1,28 @@
+{
+  "name": "@macrostrat/hyper",
+  "version": "1.0.0",
+  "description": "A helper library for hyperscript and react",
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c",
+    "prepublish": "npm run-script build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.5.4",
+    "@babel/preset-env": "^7.5.4",
+    "coffeescript": "^2.4.1",
+    "rollup": "^1.16.7",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-coffee-script": "^2.0.0"
+  },
+  "dependencies": {
+    "react-hyperscript": "^3.2.0"
+  }
+}
