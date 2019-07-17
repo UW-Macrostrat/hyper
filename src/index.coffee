@@ -6,7 +6,7 @@ applyIf = (h)->
     if v then h else -> null
   return h
 
-hyper.if = applyIf(hyper)
+applyIf(hyper)
 
 hyper.styled = (styles)->
   h = ->
@@ -38,4 +38,5 @@ hyperIf = hyper.if
 hyperStyled = hyper.styled
 
 export default hyper
-export {hyperIf, hyperStyled}
+export {classed} from './classed'
+export {hyperIf, hyperStyled, applyIf}
