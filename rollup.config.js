@@ -1,6 +1,7 @@
 import pkg from './package.json';
 import babel from 'rollup-plugin-babel';
 import coffee from 'rollup-plugin-coffee-script';
+import resolve from 'rollup-plugin-node-resolve';
 
 export default {
  input: 'src/index.coffee', // our source file
@@ -17,9 +18,10 @@ export default {
   ],
   external: Object.keys(pkg.dependencies || {}),
   plugins: [
-  coffee(),
-  babel({
-    exclude: 'node_modules/**'
-  })
+    resolve({ extensions: [ '.js', '.coffee' ]}),
+    coffee(),
+    babel({
+      exclude: 'node_modules/**'
+    })
   ]
 };
