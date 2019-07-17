@@ -24,7 +24,7 @@ Usage: `h.if(shouldRender)('div', "I only render when I should")`
 
 Makes working with [CSS modules](https://github.com/css-modules/css-modules) a bit easier.
 Finds class names in components and replaces with namespaced values in all components
-created. Adds a bit of runtime overhead. Accessible as `h.styled`
+created. Adds a bit of runtime overhead. Accessible as `h.styled`.
 
 Usage:
 
@@ -38,3 +38,14 @@ import hyper from '@macrostrat/hyper'
 h = hyper.styled(styles)
 
 ```
+
+## Utilities
+
+### `addClassNames(props)->newProps`
+
+A wrapper around the [classnames](https://github.com/JedWatson/classnames) module,
+which extends the `className` string for a `props` object.
+
+### `classed(Component, 'class-name')`
+
+Adds a class to a React component.
