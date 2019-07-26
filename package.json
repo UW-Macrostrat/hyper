@@ -27,6 +27,7 @@
     "rollup-plugin-coffee-script": "^2.0.0"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "react-hyperscript": "^3.2.0"
   }
 }
