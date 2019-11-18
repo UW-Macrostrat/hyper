@@ -38,5 +38,5 @@ hyperIf = hyper.if
 hyperStyled = hyper.styled
 
 export default hyper
-export {classed} from './classed'
+export {classed, addClassNames} from './classed'
 export {hyperIf, hyperStyled, applyIf}
