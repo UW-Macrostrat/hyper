@@ -1,6 +1,7 @@
 import h from 'react-hyperscript'
 
-compose = (components...)->(props)->
+compose = (args...)->(props)->
+  components = [args...]
   # Compose a series of react components
   {children: child, rest...} = props
   child = h(components.pop(), props)
