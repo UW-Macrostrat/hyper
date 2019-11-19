@@ -38,5 +38,6 @@ hyperIf = hyper.if
 hyperStyled = hyper.styled
 
 export default hyper
+export {compose} from './compose'
 export {classed, addClassNames} from './classed'
 export {hyperIf, hyperStyled, applyIf}
