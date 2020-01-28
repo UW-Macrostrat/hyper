@@ -4,7 +4,7 @@
   "description": "A helper library for hyperscript and react",
   "main": "lib/index.cjs.js",
   "module": "lib/index.js",
-  "typings": "lib/types.d.ts",
+  "typings": "lib/module.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c && tsc --emitDeclarationOnly",
