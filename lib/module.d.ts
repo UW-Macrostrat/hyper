@@ -1,8 +1,8 @@
 /// <reference types="react" />
 /// <reference types="react-hyperscript" />
 declare module "classed" {
-    const addClassNames: (props: any, addedClassNames: any) => any;
-    const classed: (component: any, addedClassNames: any) => (props: any) => import("react").ReactElement<any, string | ((props: any) => import("react").ReactElement<any, string | any | (new (props: any) => import("react").Component<any, any, any>)>) | (new (props: any) => import("react").Component<any, any, any>)>;
+    const addClassNames: (props: any, ...addedClassNames: import("classnames/types").ClassValue[]) => any;
+    const classed: (component: any, ...addedClassNames: import("classnames/types").ClassValue[]) => (props: any) => import("react").ReactElement<any, string | ((props: any) => import("react").ReactElement<any, string | any | (new (props: any) => import("react").Component<any, any, any>)>) | (new (props: any) => import("react").Component<any, any, any>)>;
     export { classed, addClassNames };
 }
 declare module "compose" {

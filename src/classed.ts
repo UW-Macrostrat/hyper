@@ -6,14 +6,16 @@
 import classNames from 'classnames';
 import h from 'react-hyperscript';
 
-const addClassNames = function(props, addedClassNames){
+type ClassNames = Parameters<typeof classNames>
+
+const addClassNames = function(props, ...addedClassNames: ClassNames){
   let {className, ...rest} = props;
-  className = classNames(className, addedClassNames);
+  className = classNames(className, ...addedClassNames);
   return {className, ...rest};
 };
 
-const classed = (component, addedClassNames) => (function(props) {
-    const newProps = addClassNames(props, addedClassNames);
+const classed = (component, ...addedClassNames: ClassNames) => (function(props) {
+    const newProps = addClassNames(props, ...addedClassNames);
     return h(component, newProps);
 });
 
