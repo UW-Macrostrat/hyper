@@ -6,6 +6,9 @@
  */
 import h from 'react-hyperscript';
 
+// An aggressive shorthand to create a react component
+const C = (c, props={})=>({children})=>h(c, {...props, children})
+
 const compose = (...args) => (function(props) {
   let c;
   const components = [...args];
@@ -17,4 +20,4 @@ const compose = (...args) => (function(props) {
   return child;
 });
 
-export {compose};
+export {compose, C};

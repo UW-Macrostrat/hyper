@@ -49,3 +49,29 @@ which extends the `className` string for a `props` object.
 ### `classed(Component, 'class-name')`
 
 Adds a class to a React component.
+
+### `compose(Components...)`
+
+Compose components
+
+### `C(component, props)`
+
+An aggressive shorthand to create a React component that passes through children.
+
+#### Implementation
+
+```js
+const C = (c, props={})=>({children})=>h(c, {...props, children})
+```
+
+Use `compose` and `C` together to improve deeply nested provider chains.
+
+```js
+import {compose, C} from '@macrostrat/hyper'
+const DataProvider = compose(
+    C(PublicURLProvider,{publicURL}),
+    C(APIProvider, {baseURL}),
+    C(ImageStoreProvider, {baseURL: imageBaseURL}),
+    C(TaggingApplication, props)
+  )
+```

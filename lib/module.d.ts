@@ -6,8 +6,13 @@ declare module "classed" {
     export { classed, addClassNames };
 }
 declare module "compose" {
+    const C: (c: any, props?: {}) => ({ children }: {
+        children: any;
+    }) => import("react").ReactElement<{
+        children: any;
+    }, string | ((props: any) => import("react").ReactElement<any, string | any | (new (props: any) => import("react").Component<any, any, any>)>) | (new (props: any) => import("react").Component<any, any, any>)>;
     const compose: (...args: any[]) => (props: any) => import("react").ReactElement<any, string | ((props: any) => import("react").ReactElement<any, string | any | (new (props: any) => import("react").Component<any, any, any>)>) | (new (props: any) => import("react").Component<any, any, any>)>;
-    export { compose };
+    export { compose, C };
 }
 declare module "index" {
     import hyperScript from 'react-hyperscript';
@@ -26,7 +31,7 @@ declare module "index" {
     const hyperIf: (v: boolean) => Hyper;
     const hyperStyled: (v: Styles) => Hyper;
     export default hyper;
-    export { compose } from "compose";
+    export { compose, C } from "compose";
     export { classed, addClassNames } from "classed";
     export { hyperIf, hyperStyled, applyIf };
 }

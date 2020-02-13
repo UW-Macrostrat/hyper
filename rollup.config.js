@@ -4,19 +4,20 @@ import resolve from 'rollup-plugin-node-resolve';
 
 export default {
  input: 'src/index.ts', // our source file
+ preserveModules: true,
  output: [
     {
-     file: pkg.main,
+     dir: pkg.main,
      format: 'cjs',
      sourcemap: true,
      entryFileNames: '[name].js',
      exports: 'named' // disable warning if we mix default and named exports
     },
     {
-     file: pkg.module,
+     dir: pkg.module,
      sourcemap: true,
      entryFileNames: '[name].js',
-     format: 'es' // the preferred format
+     format: 'esm' // the preferred format
     },
   ],
   external: Object.keys(pkg.dependencies || {}),
