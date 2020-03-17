@@ -1,10 +1,10 @@
 {
   "name": "@macrostrat/hyper",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "A helper library for hyperscript and react",
   "main": "lib/cjs",
   "module": "lib/esm",
-  "typings": "lib/module.d.ts",
+  "typings": "lib/types",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c && tsc --emitDeclarationOnly",
