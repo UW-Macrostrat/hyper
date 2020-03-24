@@ -1,16 +1,16 @@
 import hyperScript from 'react-hyperscript';
+import { ReactFragment } from 'react';
 declare type H = typeof hyperScript;
-declare type HParams = Parameters<H>;
 interface Styles {
     [k: string]: string;
 }
-interface Hyper {
-    (...args: HParams): ReturnType<H>;
+interface Hyper extends H {
+    (children: ReadonlyArray<Element>): ReactFragment;
     styled(v: Styles): Hyper;
     if(v: boolean): Hyper;
 }
+declare const applyIf: (h: any) => Hyper;
 declare const hyper: Hyper;
-declare const applyIf: (h: any) => any;
 declare const hyperIf: (v: boolean) => Hyper;
 declare const hyperStyled: (v: Styles) => Hyper;
 export default hyper;

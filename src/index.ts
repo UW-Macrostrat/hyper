@@ -1,30 +1,26 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import hyperScript from 'react-hyperscript';
+import {ReactFragment} from 'react'
 
 type H = typeof hyperScript
 type HParams = Parameters<H>
+
 
 interface Styles {
   [k: string]: string
 }
 
-interface Hyper {
-  (...args: HParams): ReturnType<H>,
+interface Hyper extends H {
+  // An extra overload not included in react-hyperscript DefinitelyTyped
+  (children: ReadonlyArray<Element>): ReactFragment;
   styled(v: Styles): Hyper,
   if(v: boolean): Hyper
 }
 
-const hyper: Hyper = function(...args: HParams){
+const hyper_ = function(...args: HParams){
   return hyperScript(...args)
 }
 
-hyper.if = null
-
-const applyIf = function(h) {
+const applyIf = function(h): Hyper {
   h.if = function(v: boolean){
     // Only renders component if condition is met
     if (v) { return h; } else { return () => null; }
@@ -32,9 +28,9 @@ const applyIf = function(h) {
   return h;
 };
 
-applyIf(hyper);
+const hyper = applyIf(hyper_);
 
-hyper.styled = function(styles: Styles){
+hyper.styled = function(styles: Styles): Hyper {
   const h = function() {
     const el = hyper.apply(this,arguments);
     const {props} = el;
