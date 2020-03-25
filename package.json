@@ -1,6 +1,6 @@
 {
   "name": "@macrostrat/hyper",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "A helper library for hyperscript and react",
   "main": "lib/cjs",
   "module": "lib/esm",
@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@types/classnames": "^2.2.9",
+    "@types/react": "^16.9.25",
     "@types/react-hyperscript": "^3.0.4",
     "classnames": "^2.2.6",
     "react-hyperscript": "^3.2.0"

@@ -1,11 +1,12 @@
+/// <reference types="react" />
 import hyperScript from 'react-hyperscript';
-import { ReactFragment } from 'react';
 declare type H = typeof hyperScript;
 interface Styles {
     [k: string]: string;
 }
+declare type Element = React.ReactElement | string | number | null;
 interface Hyper extends H {
-    (children: ReadonlyArray<Element>): ReactFragment;
+    (children: Element[]): React.ReactFragment;
     styled(v: Styles): Hyper;
     if(v: boolean): Hyper;
 }

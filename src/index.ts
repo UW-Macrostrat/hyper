@@ -1,5 +1,4 @@
 import hyperScript from 'react-hyperscript';
-import {ReactFragment} from 'react'
 
 type H = typeof hyperScript
 type HParams = Parameters<H>
@@ -9,9 +8,11 @@ interface Styles {
   [k: string]: string
 }
 
+type Element = React.ReactElement | string | number | null;
+
 interface Hyper extends H {
   // An extra overload not included in react-hyperscript DefinitelyTyped
-  (children: ReadonlyArray<Element>): ReactFragment;
+  (children: Element[]): React.ReactFragment;
   styled(v: Styles): Hyper,
   if(v: boolean): Hyper
 }
