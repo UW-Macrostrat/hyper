@@ -1,10 +1,6 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import classNames from 'classnames';
 import h from 'react-hyperscript';
+import {ComponentType} from 'react'; 
 
 type ClassNames = Parameters<typeof classNames>
 
@@ -14,7 +10,7 @@ const addClassNames = function(props, ...addedClassNames: ClassNames){
   return {className, ...rest};
 };
 
-const classed = (component, ...addedClassNames: ClassNames) => (function(props) {
+const classed = (component: ComponentType, ...addedClassNames: ClassNames) => (function(props) {
     const newProps = addClassNames(props, ...addedClassNames);
     return h(component, newProps);
 });

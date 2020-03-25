@@ -1,6 +1,6 @@
 import pkg from './package.json';
 import babel from 'rollup-plugin-babel';
-import resolve from 'rollup-plugin-node-resolve';
+import resolve from '@rollup/plugin-node-resolve';
 import renameExtensions from '@betit/rollup-plugin-rename-extensions';
 
 export default {

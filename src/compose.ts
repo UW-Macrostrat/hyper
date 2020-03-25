@@ -1,16 +1,17 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import h from 'react-hyperscript';
+import {PropsWithChildren, ComponentType} from 'react'
 
 // An aggressive shorthand to create a react component
-const C = (c, props={})=>({children})=>h(c, {...props, children})
 
-const compose = (...args) => (function(props) {
-  let c;
+function C<P>(c: ComponentType<PropsWithChildren<P>>, props: P = {} as P) {
+  return (nextProps: PropsWithChildren<{}>)=>{
+    const {children} = nextProps
+    return h(c, {...props, children})
+  }
+}
+
+const compose = (...args: ComponentType[]) => (function(props) {
+  let c: ComponentType;
   const components = [...args];
   // Compose a series of react components
   let child = h(components.pop(), props);
