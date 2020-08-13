@@ -1,44 +1,67 @@
-import hyperScript from 'react-hyperscript';
+import hyperScript from "react-hyperscript";
+import { ReactElement, ComponentType, ReactFragment, Ref } from "react";
 
-type H = typeof hyperScript
-type HParams = Parameters<H>
-
+// Type definitions
+type H = typeof hyperScript;
+type HParams = Parameters<H>;
 
 interface Styles {
-  [k: string]: string
+  [k: string]: string;
 }
 
-type Element = React.ReactElement | string | number | null;
+type Element = ReactElement | string | number | null;
 
-interface Hyper extends H {
-  // An extra overload not included in react-hyperscript DefinitelyTyped
-  (children: Element[]): React.ReactFragment;
-  styled(v: Styles): Hyper,
-  if(v: boolean): Hyper
+interface Props {
+  [attr: string]: any;
+  ref?: Ref<any>;
 }
 
-const hyper_ = function(...args: HParams){
-  return hyperScript(...args)
+interface Hyper {
+  // Function with one or two arguments
+  (
+    componentOrTag: ComponentType | string,
+    children?: ReadonlyArray<Element> | Element
+  ): ReactElement;
+  // Function with three arguments, with one being props
+  <T extends Props>(
+    componentOrTag: ComponentType<T> | string,
+    properties: Props,
+    children?: ReadonlyArray<Element> | Element
+  ): ReactElement<T>;
+  // Function with one list of elements -> React fragment
+  (children: ReadonlyArray<Element>): ReactFragment;
+  styled(v: Styles): Hyper;
+  if(v: boolean): Hyper;
 }
 
-const applyIf = function(h): Hyper {
-  h.if = function(v: boolean){
+const hyper_ = function (...args: HParams) {
+  return hyperScript(...args);
+};
+
+const applyIf = function (h): Hyper {
+  h.if = function (v: boolean) {
     // Only renders component if condition is met
-    if (v) { return h; } else { return () => null; }
+    if (v) {
+      return h;
+    } else {
+      return () => null;
+    }
   };
   return h;
 };
 
 const hyper = applyIf(hyper_);
 
-hyper.styled = function(styles: Styles): Hyper {
-  const h = function() {
-    const el = hyper.apply(this,arguments);
-    const {props} = el;
-    if (!("className" in props)) { return el; }
+hyper.styled = function (styles: Styles): Hyper {
+  const h = function () {
+    const el = hyper.apply(this, arguments);
+    const { props } = el;
+    if (!("className" in props)) {
+      return el;
+    }
 
     let hasChanges = false;
-    const newClasses = props.className.split(" ").map(function(d){
+    const newClasses = props.className.split(" ").map(function (d) {
       if (d in styles) {
         hasChanges = true;
         return styles[d];
@@ -46,15 +69,17 @@ hyper.styled = function(styles: Styles): Hyper {
       return d;
     });
 
-    if (!hasChanges) { return el; }
+    if (!hasChanges) {
+      return el;
+    }
 
     // Create a new react element with local style substitutions
     return {
       ...el,
       props: {
         ...props,
-        className: newClasses.join(" ")
-      }
+        className: newClasses.join(" "),
+      },
     };
   };
 
@@ -65,6 +90,6 @@ const hyperIf = hyper.if;
 const hyperStyled = hyper.styled;
 
 export default hyper;
-export {compose, C} from './compose';
-export {classed, addClassNames} from './classed';
-export {hyperIf, hyperStyled, applyIf};
+export { compose, C } from "./compose";
+export { classed, addClassNames } from "./classed";
+export { hyperIf, hyperStyled, applyIf };
