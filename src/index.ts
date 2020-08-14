@@ -1,5 +1,11 @@
 import hyperScript from "react-hyperscript";
-import { ReactElement, ComponentType, ReactFragment, Ref } from "react";
+import {
+  ReactNode,
+  ReactElement,
+  ComponentType,
+  ReactFragment,
+  Ref,
+} from "react";
 
 // Type definitions
 type H = typeof hyperScript;
@@ -9,27 +15,21 @@ interface Styles {
   [k: string]: string;
 }
 
-type Element = ReactElement | string | number | null;
-
 interface Props {
   [attr: string]: any;
-  ref?: Ref<any>;
 }
 
 interface Hyper {
   // Function with one or two arguments
-  (
-    componentOrTag: ComponentType | string,
-    children?: ReadonlyArray<Element> | Element
-  ): ReactElement;
+  (componentOrTag: ComponentType | string, children?: ReactNode): ReactElement;
   // Function with three arguments, with one being props
   <T extends Props>(
     componentOrTag: ComponentType<T> | string,
-    properties: Props,
-    children?: ReadonlyArray<Element> | Element
+    properties: T & { ref?: Ref<any>; key?: any },
+    children?: ReactNode
   ): ReactElement<T>;
   // Function with one list of elements -> React fragment
-  (children: ReadonlyArray<Element>): ReactFragment;
+  (children: ReadonlyArray<ReactNode>): ReactFragment;
   styled(v: Styles): Hyper;
   if(v: boolean): Hyper;
 }

@@ -1,16 +1,17 @@
-import { ReactElement, ComponentType, ReactFragment, Ref } from "react";
+import { ReactNode, ReactElement, ComponentType, ReactFragment, Ref } from "react";
 interface Styles {
     [k: string]: string;
 }
-declare type Element = ReactElement | string | number | null;
 interface Props {
     [attr: string]: any;
-    ref?: Ref<any>;
 }
 interface Hyper {
-    (componentOrTag: ComponentType | string, children?: ReadonlyArray<Element> | Element): ReactElement;
-    <T extends Props>(componentOrTag: ComponentType<T> | string, properties: Props, children?: ReadonlyArray<Element> | Element): ReactElement<T>;
-    (children: ReadonlyArray<Element>): ReactFragment;
+    (componentOrTag: ComponentType | string, children?: ReactNode): ReactElement;
+    <T extends Props>(componentOrTag: ComponentType<T> | string, properties: T & {
+        ref?: Ref<any>;
+        key?: any;
+    }, children?: ReactNode): ReactElement<T>;
+    (children: ReadonlyArray<ReactNode>): ReactFragment;
     styled(v: Styles): Hyper;
     if(v: boolean): Hyper;
 }
