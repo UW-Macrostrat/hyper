@@ -1,4 +1,5 @@
-import classNames, { ClassValue } from "classnames";
+import classNames from "classnames";
+import { ClassValue } from "classnames/types";
 import h from "react-hyperscript";
 import { ComponentType } from "react";
 
