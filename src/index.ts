@@ -19,7 +19,7 @@ interface Props {
   [attr: string]: any;
 }
 
-interface Hyper {
+export interface Hyper {
   // Function with one or two arguments
   (componentOrTag: ComponentType | string, children?: ReactNode): ReactElement;
   // Function with three arguments, with one being props

@@ -5,7 +5,7 @@ interface Styles {
 interface Props {
     [attr: string]: any;
 }
-interface Hyper {
+export interface Hyper {
     (componentOrTag: ComponentType | string, children?: ReactNode): ReactElement;
     <T extends Props>(componentOrTag: ComponentType<T> | string, properties: T & {
         ref?: Ref<any>;
