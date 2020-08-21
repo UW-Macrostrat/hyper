@@ -25,7 +25,7 @@ export interface Hyper {
   // Function with three arguments, with one being props
   <T extends Props>(
     componentOrTag: ComponentType<T> | string,
-    properties: T & { ref?: Ref<any>; key?: any },
+    properties?: T & { ref?: Ref<any>; key?: any },
     children?: ReactNode
   ): ReactElement<T>;
   // Function with one list of elements -> React fragment
