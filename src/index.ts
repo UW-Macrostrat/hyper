@@ -56,12 +56,13 @@ hyper.styled = function (styles: Styles): Hyper {
   const h = function () {
     const el = hyper.apply(this, arguments);
     const { props } = el;
-    if (!("className" in props)) {
+    const { className } = props;
+    if (className == null) {
       return el;
     }
 
     let hasChanges = false;
-    const newClasses = props.className.split(" ").map(function (d) {
+    const newClasses = className.split(" ").map(function (d) {
       if (d in styles) {
         hasChanges = true;
         return styles[d];
