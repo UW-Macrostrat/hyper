@@ -7,10 +7,10 @@ interface Props {
 }
 export interface Hyper {
     (componentOrTag: ComponentType | string, children?: ReactNode): ReactElement;
-    <T extends Props>(componentOrTag: ComponentType<T> | string, properties?: T & {
+    <T extends Props>(componentOrTag: ComponentType<T> | string, properties?: (T & {
         ref?: Ref<any>;
         key?: any;
-    }, children?: ReactNode): ReactElement<T>;
+    }) | null, children?: ReactNode): ReactElement<T>;
     (children: ReadonlyArray<ReactNode>): ReactFragment;
     styled(v: Styles): Hyper;
     if(v: boolean): Hyper;
