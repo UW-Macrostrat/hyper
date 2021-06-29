@@ -4,6 +4,7 @@ import { PropsWithChildren, ComponentType } from "react";
 // An aggressive shorthand to create a react component
 
 function C<P>(c: ComponentType<PropsWithChildren<P>>, props: P = {} as P) {
+  /** A component that passes through children */
   return (nextProps: PropsWithChildren<{}>) => {
     const { children } = nextProps;
     return h(c, { ...props, children });

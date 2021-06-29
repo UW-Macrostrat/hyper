@@ -1,6 +1,6 @@
 {
   "name": "@macrostrat/hyper",
-  "version": "1.2.13",
+  "version": "1.2.14",
   "description": "A helper library for hyperscript and react",
   "main": "lib/cjs",
   "module": "lib/esm",
@@ -26,13 +26,12 @@
     "@betit/rollup-plugin-rename-extensions": "^0.1.0",
     "@rollup/plugin-babel": "^5.1.0",
     "@rollup/plugin-node-resolve": "^7.1.1",
-    "typescript": "^3.9.7"
+    "typescript": "^4.3.4"
   },
   "dependencies": {
-    "@types/classnames": "^2.2.10",
-    "@types/react": "^16.9.46",
-    "@types/react-hyperscript": "^3.0.4",
-    "classnames": "^2.2.6",
+    "@types/react": "^17.0.11",
+    "@types/react-hyperscript": "^3.0.5",
+    "classnames": "^2.3.1",
     "react-hyperscript": "^3.2.0"
   }
 }
