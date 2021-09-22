@@ -12,11 +12,11 @@ import {
 type H = typeof hyperScript;
 type HParams = Parameters<H>;
 
-interface Styles {
+export interface Styles {
   [k: string]: string;
 }
 
-interface Props {
+export interface Props {
   [attr: string]: any;
 }
 

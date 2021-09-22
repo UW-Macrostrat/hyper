@@ -1,8 +1,8 @@
 import { ReactNode, ReactElement, ComponentType, ReactFragment, Ref, JSXElementConstructor } from "react";
-interface Styles {
+export interface Styles {
     [k: string]: string;
 }
-interface Props {
+export interface Props {
     [attr: string]: any;
 }
 export interface HyperElement<T = Props, C extends string | JSXElementConstructor<any> = string | JSXElementConstructor<any>> extends ReactElement<T, C> {
