@@ -33,9 +33,7 @@ function createHyperElement<T>(el: ReactElement<T>|ReactFragment): HyperElement<
 
 interface HyperBase {
   // Function with one or two arguments
-  (componentOrTag: ComponentType | string, children?: ReadonlyArray<ReactNode>): HyperElement;
-  // Function with two arguments, with the second being a single element
-  (componentOrTag: ComponentType | string, child: HyperElement): HyperElement;
+  (componentOrTag: ComponentType | string, children?: ReadonlyArray<ReactNode> | HyperElement | string): HyperElement;
   // Function with three arguments, with one being props
   <T extends Props>(
     componentOrTag: ComponentType<T> | string,

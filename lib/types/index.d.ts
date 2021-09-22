@@ -9,8 +9,7 @@ export interface HyperElement<T = Props, C extends string | JSXElementConstructo
     isReactElement: true;
 }
 interface HyperBase {
-    (componentOrTag: ComponentType | string, children?: ReadonlyArray<ReactNode>): HyperElement;
-    (componentOrTag: ComponentType | string, child: HyperElement): HyperElement;
+    (componentOrTag: ComponentType | string, children?: ReadonlyArray<ReactNode> | HyperElement | string): HyperElement;
     <T extends Props>(componentOrTag: ComponentType<T> | string, properties?: T & {
         ref?: Ref<any>;
         key?: any;
