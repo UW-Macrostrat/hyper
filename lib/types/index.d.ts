@@ -5,13 +5,19 @@ interface Styles {
 interface Props {
     [attr: string]: any;
 }
-export interface Hyper {
-    (componentOrTag: ComponentType | string, children?: ReactNode): ReactElement;
+interface HyperElement<T = {}> extends ReactElement<T> {
+    isReactElement: true;
+}
+interface HyperBase {
+    (componentOrTag: ComponentType | string, children?: ReadonlyArray<ReactNode>): HyperElement;
+    (componentOrTag: ComponentType | string, child: HyperElement): HyperElement;
     <T extends Props>(componentOrTag: ComponentType<T> | string, properties?: T & {
         ref?: Ref<any>;
         key?: any;
-    } | null, children?: ReactNode): ReactElement<T>;
+    } | null, children?: ReactNode): HyperElement<T>;
     (children: ReadonlyArray<ReactNode>): ReactFragment;
+}
+interface Hyper extends HyperBase {
     styled(v: Styles): Hyper;
     if(v: boolean): Hyper;
 }

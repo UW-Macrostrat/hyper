@@ -19,23 +19,43 @@ interface Props {
   [attr: string]: any;
 }
 
-export interface Hyper {
+interface HyperElement<T = {}> extends ReactElement<T> {
+  isReactElement: true;
+}
+
+
+function createHyperElement<T = {}>(el: ReactElement<T>|ReactFragment): HyperElement<T> {
+  // @ts-ignore
+  el.isReactElement = true;
+  return el as HyperElement<T>;
+}
+
+interface HyperBase {
   // Function with one or two arguments
-  (componentOrTag: ComponentType | string, children?: ReactNode): ReactElement;
+  (componentOrTag: ComponentType | string, children?: ReadonlyArray<ReactNode>): HyperElement;
+  // Function with two arguments, with the second being a single element
+  (componentOrTag: ComponentType | string, child: HyperElement): HyperElement;
   // Function with three arguments, with one being props
   <T extends Props>(
     componentOrTag: ComponentType<T> | string,
     properties?: T & { ref?: Ref<any>; key?: any } | null,
     children?: ReactNode
-  ): ReactElement<T>;
+  ): HyperElement<T>;
   // Function with one list of elements -> React fragment
   (children: ReadonlyArray<ReactNode>): ReactFragment;
+}
+
+interface Hyper extends HyperBase {
   styled(v: Styles): Hyper;
   if(v: boolean): Hyper;
 }
 
-const hyper_ = function (...args: HParams) {
-  return hyperScript(...args);
+const hyper_: HyperBase = function (...args): HyperElement {
+  if (args.length === 2 && args[1].isReactElement) {
+    // Special case where a single child element is passed
+    return createHyperElement(hyperScript(args[0], null, args[1]));
+  }
+  return createHyperElement(hyperScript(...args))
 };
 
 const applyIf = function (h): Hyper {
