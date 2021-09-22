@@ -5,6 +5,7 @@ import {
   ComponentType,
   ReactFragment,
   Ref,
+  JSXElementConstructor
 } from "react";
 
 // Type definitions
@@ -19,12 +20,12 @@ interface Props {
   [attr: string]: any;
 }
 
-interface HyperElement<T = {}> extends ReactElement<T> {
+export interface HyperElement<T = Props, C extends string | JSXElementConstructor<any> = string | JSXElementConstructor<any>> extends ReactElement<T, C> {
   isReactElement: true;
 }
 
 
-function createHyperElement<T = {}>(el: ReactElement<T>|ReactFragment): HyperElement<T> {
+function createHyperElement<T>(el: ReactElement<T>|ReactFragment): HyperElement<T> {
   // @ts-ignore
   el.isReactElement = true;
   return el as HyperElement<T>;
