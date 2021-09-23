@@ -5,12 +5,8 @@ import {
   ComponentType,
   ReactFragment,
   Ref,
-  JSXElementConstructor
+  isValidElement
 } from "react";
-
-// Type definitions
-type H = typeof hyperScript;
-type HParams = Parameters<H>;
 
 export interface Styles {
   [k: string]: string;
@@ -20,26 +16,15 @@ export interface Props {
   [attr: string]: any;
 }
 
-export interface HyperElement<T = Props, C extends string | JSXElementConstructor<any> = string | JSXElementConstructor<any>> extends ReactElement<T, C> {
-  isReactElement: true;
-}
-
-
-function createHyperElement<T>(el: ReactElement<T>|ReactFragment): HyperElement<T> {
-  // @ts-ignore
-  el.isReactElement = true;
-  return el as HyperElement<T>;
-}
-
 interface HyperBase {
   // Function with one or two arguments
-  (componentOrTag: ComponentType | string, children?: ReadonlyArray<ReactNode> | HyperElement | string): HyperElement;
+  (componentOrTag: ComponentType | string, children?: ReadonlyArray<ReactNode> | ReactElement | string): ReactElement;
   // Function with three arguments, with one being props
   <T extends Props>(
     componentOrTag: ComponentType<T> | string,
     properties?: T & { ref?: Ref<any>; key?: any } | null,
     children?: ReactNode
-  ): HyperElement<T>;
+  ): ReactElement<T>;
   // Function with one list of elements -> React fragment
   (children: ReadonlyArray<ReactNode>): ReactFragment;
 }
@@ -49,12 +34,12 @@ interface Hyper extends HyperBase {
   if(v: boolean): Hyper;
 }
 
-const hyper_: HyperBase = function (...args): HyperElement {
-  if (args.length === 2 && args[1].isReactElement) {
+const hyper_: HyperBase = function (...args): ReactElement {
+  if (args.length === 2 && isValidElement(args[1])) {
     // Special case where a single child element is passed
-    return createHyperElement(hyperScript(args[0], null, args[1]));
+    return hyperScript(args[0], null, args[1]);
   }
-  return createHyperElement(hyperScript(...args))
+  return hyperScript(...args)
 };
 
 const applyIf = function (h): Hyper {

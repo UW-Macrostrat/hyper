@@ -1,19 +1,16 @@
-import { ReactNode, ReactElement, ComponentType, ReactFragment, Ref, JSXElementConstructor } from "react";
+import { ReactNode, ReactElement, ComponentType, ReactFragment, Ref } from "react";
 export interface Styles {
     [k: string]: string;
 }
 export interface Props {
     [attr: string]: any;
 }
-export interface HyperElement<T = Props, C extends string | JSXElementConstructor<any> = string | JSXElementConstructor<any>> extends ReactElement<T, C> {
-    isReactElement: true;
-}
 interface HyperBase {
-    (componentOrTag: ComponentType | string, children?: ReadonlyArray<ReactNode> | HyperElement | string): HyperElement;
+    (componentOrTag: ComponentType | string, children?: ReadonlyArray<ReactNode> | ReactElement | string): ReactElement;
     <T extends Props>(componentOrTag: ComponentType<T> | string, properties?: T & {
         ref?: Ref<any>;
         key?: any;
-    } | null, children?: ReactNode): HyperElement<T>;
+    } | null, children?: ReactNode): ReactElement<T>;
     (children: ReadonlyArray<ReactNode>): ReactFragment;
 }
 interface Hyper extends HyperBase {
