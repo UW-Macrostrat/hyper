@@ -5,7 +5,7 @@ import {
   ComponentType,
   ReactFragment,
   Ref,
-  isValidElement
+  isValidElement,
 } from "react";
 
 export interface Styles {
@@ -16,13 +16,18 @@ export interface Props {
   [attr: string]: any;
 }
 
+type ExtraParams = { ref?: Ref<any>; key?: any };
+
 interface HyperBase {
   // Function with one or two arguments
-  (componentOrTag: ComponentType | string, children?: ReadonlyArray<ReactNode> | ReactElement | string): ReactElement;
+  (
+    componentOrTag: ComponentType | string,
+    children?: ReadonlyArray<ReactNode> | ReactElement | string
+  ): ReactElement;
   // Function with three arguments, with one being props
   <T extends Props>(
     componentOrTag: ComponentType<T> | string,
-    properties?: T & { ref?: Ref<any>; key?: any } | null,
+    properties?: ((T | Omit<T, "children">) & ExtraParams) | null,
     children?: ReactNode
   ): ReactElement<T>;
   // Function with one list of elements -> React fragment
@@ -39,7 +44,7 @@ const hyper_: HyperBase = function (...args): ReactElement {
     // Special case where a single child element is passed
     return hyperScript(args[0], null, args[1]);
   }
-  return hyperScript(...args)
+  return hyperScript(...args);
 };
 
 const applyIf = function (h): Hyper {
