@@ -80,7 +80,7 @@ function createNoOpHyper(): Hyper {
   _hyper.styles = () => {
     return {};
   };
-  return _hyper;
+  return _hyper as Hyper;
 }
 
 const hyperCore: HyperBase = function (...args): ReactElement {
@@ -92,8 +92,6 @@ const hyperCore: HyperBase = function (...args): ReactElement {
 };
 
 function createHyper(): Hyper {
-  let _styles = null;
-
   const _hyper = function () {
     // First, run the core hyper function
     const el = hyperCore.apply(this, arguments);
@@ -102,6 +100,8 @@ function createHyper(): Hyper {
     const styles = _hyper.styles() ?? {};
     return applyStyles(el, styles);
   };
+
+  _hyper.prototype._styles = null;
 
   _hyper.if = function (v: boolean): Hyper {
     // Only renders component if condition is met
@@ -114,12 +114,12 @@ function createHyper(): Hyper {
   };
 
   _hyper.styled = function (styles: Styles | null): Hyper {
-    _styles = styles;
+    hyper.prototype._styles = styles;
     return _hyper as Hyper;
   };
 
   _hyper.styles = function () {
-    return _styles;
+    return _hyper.prototype._styles;
   };
 
   return _hyper as Hyper;
