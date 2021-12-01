@@ -1,5 +1,5 @@
 import hyperScript from "react-hyperscript";
-import {
+import React, {
   ReactNode,
   ReactElement,
   ComponentType,
@@ -39,62 +39,90 @@ interface Hyper extends HyperBase {
   if(v: boolean): Hyper;
 }
 
-const hyper_: HyperBase = function (...args): ReactElement {
-  if (args.length === 2 && isValidElement(args[1])) {
-    // Special case where a single child element is passed
-    return hyperScript(args[0], null, args[1]);
+function applyStyles(
+  element: React.ReactElement<any>,
+  styles: Styles
+): React.ReactNode {
+  const { props } = element;
+  const { className } = props;
+  if (className == null) {
+    return element;
   }
-  return hyperScript(...args);
-};
 
-const applyIf = function (h): Hyper {
-  h.if = function (v: boolean) {
+  let hasChanges = false;
+  const newClasses = className.split(" ").map(function (d) {
+    if (d in styles) {
+      hasChanges = true;
+      return styles[d];
+    }
+    return d;
+  });
+
+  if (!hasChanges) {
+    return element;
+  }
+
+  // Create a new react element with local style substitutions
+  return {
+    ...element,
+    props: {
+      ...props,
+      className: newClasses.join(" "),
+    },
+  };
+}
+
+function applyComplications(hyperBase: HyperBase): Hyper {
+  let _styles = null;
+
+  const _hyper = function () {
+    // First, run the core hyper function
+    const el = hyperBase.apply(this, arguments);
+    // If no styles are registered, return the element
+
+    if (_styles === null) {
+      return el;
+    } else {
+      // Otherwise, apply the styles
+      return applyStyles(el, _styles);
+    }
+  };
+
+  _hyper.if = function (v: boolean): Hyper {
     // Only renders component if condition is met
     if (v) {
-      return h;
+      return _hyper;
     } else {
-      return () => null;
+      // Return a no-op hyper
+      return applyComplications(() => null);
     }
   };
-  return h;
-};
 
-const hyper = applyIf(hyper_);
-
-hyper.styled = function (styles: Styles): Hyper {
-  const h = function () {
-    const el = hyper.apply(this, arguments);
-    const { props } = el;
-    const { className } = props;
-    if (className == null) {
-      return el;
-    }
-
-    let hasChanges = false;
-    const newClasses = className.split(" ").map(function (d) {
-      if (d in styles) {
-        hasChanges = true;
-        return styles[d];
-      }
-      return d;
-    });
-
-    if (!hasChanges) {
-      return el;
-    }
-
-    // Create a new react element with local style substitutions
-    return {
-      ...el,
-      props: {
-        ...props,
-        className: newClasses.join(" "),
-      },
-    };
+  _hyper.styled = function (styles: Styles | null): Hyper {
+    _styles = styles;
+    return _hyper;
   };
 
-  return applyIf(h);
-};
+  _hyper.styles = function () {
+    return _styles;
+  };
+
+  return _hyper;
+}
+
+function createHyper(): Hyper {
+  let hyperCore: HyperBase = function (...args): ReactElement {
+    if (args.length === 2 && isValidElement(args[1])) {
+      // Special case where a single child element is passed
+      return hyperScript(args[0], null, args[1]);
+    }
+    return hyperScript(...args);
+  } as Hyper;
+
+  return applyComplications(hyperCore);
+}
+
+const hyper = createHyper();
 
 const hyperIf = hyper.if;
 const hyperStyled = hyper.styled;
@@ -102,4 +130,4 @@ const hyperStyled = hyper.styled;
 export default hyper;
 export { compose, C } from "./compose";
 export { classed, addClassNames } from "./classed";
-export { hyperIf, hyperStyled, applyIf };
+export { hyperIf, hyperStyled };
