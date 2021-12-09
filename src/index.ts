@@ -91,17 +91,14 @@ const hyperCore: HyperBase = function (...args): ReactElement {
   return hyperScript(...args);
 };
 
-function createHyper(): Hyper {
+function createHyper(styles = {}): Hyper {
   const _hyper = function () {
     // First, run the core hyper function
     const el = hyperCore.apply(this, arguments);
     // If no styles are registered, return the element
 
-    const styles = _hyper.styles() ?? {};
     return applyStyles(el, styles);
   };
-
-  _hyper.prototype._styles = null;
 
   _hyper.if = function (v: boolean): Hyper {
     // Only renders component if condition is met
@@ -114,15 +111,14 @@ function createHyper(): Hyper {
   };
 
   _hyper.styled = function (styles: Styles | null): Hyper {
-    hyper.prototype._styles = styles;
-    return _hyper as Hyper;
+    return createHyper(styles);
   };
 
   _hyper.styles = function () {
-    return _hyper.prototype._styles;
+    return styles;
   };
 
-  return _hyper as Hyper;
+  return _hyper as ;
 }
 
 const hyper = createHyper();
