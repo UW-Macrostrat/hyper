@@ -8,9 +8,14 @@ modern web applications instead of JSX.
 # Basic usage
 
 ```js
+import { render } from "react-dom";
 import h from "@macrostrat/hyper";
 
-MyDiv = () => h("div");
+const MyDiv = () =>
+  h("div", [h("h1", "Hello, world!"), h("p", "This is a paragraph.")]);
+
+const el = document.body.appendChild(document.createElement("div"));
+render(h(MyDiv), el);
 ```
 
 # Applying CSS module styles
@@ -22,26 +27,29 @@ created. This adds a bit of runtime overhead, but is worth it, since you can tra
 ## Usage
 
 ```js
+import { render } from "react-dom";
 import styles from "./test.css";
-import h from "@macrostrat/hyper";
-h.styled(styles);
 
-h("div.styled");
-```
-
-Styles can be unset using `h.styled(null)` (though this will presumably be uncommon).
-
-In versions older than `2.0.0`, the `hyper` function was stateless, and a styled
-functions had to be created separately. This is no longer the case, although
-most patterns of this usage are still supported.
-
-```js
-// or equivalently
 import hyper from "@macrostrat/hyper";
 const h = hyper.styled(styles);
 // or equivalently
 import { hyperStyled } from "@macrostrat/hyper";
 const h = hyperStyled(styles);
+
+const el = document.body.appendChild(document.createElement("div"));
+render(h("div.styled"), el);
+```
+
+If you have a lot of styles, you can apply them all:
+
+```js
+import hyper from "@macrostrat/hyper";
+import styles from "./test.css";
+import styles1 from "./test1.styl";
+
+const h = hyper.styled({ ...styles, ...styles1 });
+
+h("div#pos-1.warning.major-caveat");
 ```
 
 # Conditional rendering
@@ -98,5 +106,6 @@ is run. Prefer to run this outside of the render loop where possible.
 
 # Changelog
 
-In version `2.0.0`, (November 2021) the `hyper.styled` function was changed to be stateful, allowing an easier API for CSS styling. The `applyIf` function was removed from the
-public API.
+In version `2.0.0`, (November 2021) the `hyper.styled` function was changed to be
+stateful, allowing an easier API for CSS styling. The `applyIf` function was removed from the
+public API. In `2.0.1`, we had to roll back some of our notional improvements because they were unworkable with ES Modules.
