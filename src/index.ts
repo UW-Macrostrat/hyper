@@ -88,7 +88,7 @@ const hyperCore: HyperBase = function (...args): ReactElement {
     // Special case where a single child element is passed
     return hyperScript(args[0], null, args[1]);
   }
-  return hyperScript.apply(null, args);
+  return hyperScript.apply(this, args);
 };
 
 function createHyper(styles = {}): Hyper {
