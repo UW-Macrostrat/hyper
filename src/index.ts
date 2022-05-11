@@ -1,12 +1,6 @@
 import hyperScript from "./react-hyperscript";
-import React, {
-  ReactNode,
-  ReactElement,
-  ComponentType,
-  ReactFragment,
-  Ref,
-  isValidElement,
-} from "react";
+import { HyperBase } from "./types";
+import React, { ReactElement, isValidElement } from "react";
 
 export interface Styles {
   [k: string]: string;
@@ -16,24 +10,7 @@ export interface Props {
   [attr: string]: any;
 }
 
-type ExtraParams = { ref?: Ref<any>; key?: any };
-
-interface HyperBase {
-  // Function with one or two arguments
-  (
-    componentOrTag: ComponentType | string,
-    children?: ReadonlyArray<ReactNode> | ReactElement | string
-  ): ReactElement;
-  // Function with three arguments, with one being props
-  <T extends Props>(
-    componentOrTag: ComponentType<T> | string,
-    properties?: ((T | Omit<T, "children">) & ExtraParams) | null,
-    children?: ReactNode
-  ): ReactElement<T>;
-  // Function with one list of elements -> React fragment
-  (children: ReadonlyArray<ReactNode>): ReactFragment;
-}
-
+// TODO: this is almost the same interfaces as our base hyperscript type now, maybe we should merge them?
 interface Hyper extends HyperBase {
   styled(v: Styles): Hyper;
   styles(): Styles | null;

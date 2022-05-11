@@ -1,6 +1,6 @@
 {
   "name": "@macrostrat/hyper",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "A helper library for hyperscript and react",
   "type": "module",
   "main": "./dist/index.cjs",

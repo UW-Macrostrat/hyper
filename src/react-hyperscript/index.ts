@@ -1,7 +1,7 @@
 "use strict";
 import React from "react";
 import parseTag from "./parse-tag";
-import { HyperCore } from "./types";
+import { HyperBase } from "../types";
 
 function h(componentOrTag, properties, children) {
   // if only one argument which is an array, wrap items with React.Fragment
@@ -54,4 +54,4 @@ function isChildren(x) {
   return typeof x === "string" || typeof x === "number" || Array.isArray(x);
 }
 
-export default h as HyperCore;
+export default h as HyperBase;
