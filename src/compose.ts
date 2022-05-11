@@ -1,4 +1,4 @@
-import h from "react-hyperscript";
+import h from "./react-hyperscript";
 import { PropsWithChildren, ComponentType } from "react";
 
 // An aggressive shorthand to create a react component
@@ -7,7 +7,7 @@ function C<P>(c: ComponentType<PropsWithChildren<P>>, props: P = {} as P) {
   /** A component that passes through children */
   return (nextProps: PropsWithChildren<{}>) => {
     const { children } = nextProps;
-    return h(c, { ...props, children });
+    return h(c, { ...props, children } as PropsWithChildren<P>);
   };
 }
 

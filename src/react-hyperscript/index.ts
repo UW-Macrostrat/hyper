@@ -1,8 +1,9 @@
 "use strict";
 import React from "react";
 import parseTag from "./parse-tag";
+import { HyperCore } from "./types";
 
-export default function h(componentOrTag, properties, children) {
+function h(componentOrTag, properties, children) {
   // if only one argument which is an array, wrap items with React.Fragment
   if (arguments.length === 1 && Array.isArray(componentOrTag)) {
     return h(React.Fragment, null, componentOrTag);
@@ -52,3 +53,5 @@ export default function h(componentOrTag, properties, children) {
 function isChildren(x) {
   return typeof x === "string" || typeof x === "number" || Array.isArray(x);
 }
+
+export default h as HyperCore;

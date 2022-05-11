@@ -1,6 +1,6 @@
 {
   "name": "@macrostrat/hyper",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "A helper library for hyperscript and react",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -29,7 +29,6 @@
   },
   "dependencies": {
     "@types/react": "*",
-    "@types/react-hyperscript": "^3.0.5",
     "classnames": "^2.3.1"
   },
   "prettier": {}

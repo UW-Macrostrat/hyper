@@ -1,5 +1,5 @@
 import classNames, { Argument } from "classnames";
-import h from "react-hyperscript";
+import h from "./react-hyperscript";
 import { ComponentType } from "react";
 
 const addClassNames = function (props, ...addedClassNames: Argument[]) {
