@@ -18,6 +18,16 @@ const el = document.body.appendChild(document.createElement("div"));
 render(h(MyDiv), el);
 ```
 
+# Mithril compatibility
+
+The [Mithril](https://mithril.js.org/) framework is one of the few widely-used frameworks to
+recommend hyperscript syntax over JSX. They have a [nice explainer](https://mithril.js.org/jsx.html#jsx-vs-hyperscript)
+on the differences between the syntaxes in their docs. `@macrostrat/hyper` has some of the
+Mithril template engine's flexibility, allowing templates to cross-compile. This means that
+tooling for converting HTML and JSX to hyperscript, such as this
+[Mithril template converter](https://arthurclemens.github.io/mithril-template-converter/index.html),
+can be used to migrate components.
+
 # Applying CSS module styles
 
 The `hyperStyled` function makes working with [CSS modules](https://github.com/css-modules/css-modules) a bit easier.
