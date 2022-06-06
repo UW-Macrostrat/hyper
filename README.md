@@ -106,6 +106,21 @@ is run. Prefer to run this outside of the render loop where possible.
 
 # Changelog
 
-In version `2.0.0`, (November 2021) the `hyper.styled` function was changed to be
-stateful, allowing an easier API for CSS styling. The `applyIf` function was removed from the
-public API. In `2.0.1`, we had to roll back some of our notional improvements because they were unworkable with ES Modules.
+## Version `2.2.0` (June 2022)
+
+- Fix a small bug with types for React fragments
+- Add a note about Mithril JS compatibility to documentation.
+
+## Version `2.1.0` (April 2022)
+
+- Integrate `react-hyperscript` and `@types/react-hyperscript` directly
+  into codebase to fix typing errors.
+- Substantially rework typings to be simpler and more consistent.
+
+## Version `2.0.0` (November 2021)
+
+- The `hyper.styled` function was changed to be stateful,
+  allowing an easier API for CSS styling.
+- The `applyIf` function was removed from the public API.
+- **Note:** In `2.0.1`, we had to roll back some of our "improvements"
+  because they were unworkable with ES Modules.
