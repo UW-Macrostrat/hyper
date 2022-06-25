@@ -106,4 +106,4 @@ const hyperStyled = hyper.styled;
 export default hyper;
 export { compose, C } from "./compose";
 export { classed, addClassNames } from "./classed";
-export { hyperIf, hyperStyled };
+export { hyperIf, hyperStyled, Hyper };

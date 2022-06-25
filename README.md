@@ -116,6 +116,10 @@ is run. Prefer to run this outside of the render loop where possible.
 
 # Changelog
 
+## Version `2.2.1` (June 2022)
+
+- Export Hyper type by default.
+
 ## Version `2.2.0` (June 2022)
 
 - Fix a small bug with types for React fragments
