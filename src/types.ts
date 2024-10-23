@@ -12,6 +12,7 @@ type Properties = {
   [key: string]: any;
 };
 
+
 export interface Styles {
   [k: string]: string;
 }

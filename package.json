@@ -1,9 +1,9 @@
 {
   "name": "@macrostrat/hyper",
-  "version": "3.0.0-beta.1",
+  "version": "3.0.0-beta.3",
   "description": "A helper library for hyperscript and react",
-  "main": "dist/main.js",
-  "module": "dist/module.js",
+  "main": "dist/hyper.cjs",
+  "module": "dist/hyper.mjs",
   "types": "dist/types.d.ts",
   "source": "src/index.ts",
   "scripts": {
@@ -17,7 +17,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": " git://github.com/UW-Macrostrat/hyper.git"
+    "url": " https://github.com/UW-Macrostrat/hyper.git"
   },
   "peerDependencies": {
     "react": ">= 0.12.0 < 20.0.0"
@@ -30,8 +30,9 @@
   "exports": {
     ".": {
       "typescript": "./src",
-      "import": "./dist/module.js",
-      "require": "./dist/main.js"
+      "import": "./dist/hyper.mjs",
+      "require": "./dist/hyper.cjs",
+      "types": "./dist/types.d.ts"
     },
     "./dist/": {
       "import": "./dist/",
