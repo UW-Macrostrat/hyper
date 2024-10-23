@@ -1,16 +1,15 @@
 {
   "name": "@macrostrat/hyper",
-  "version": "2.2.1",
+  "version": "3.0.0-beta.1",
   "description": "A helper library for hyperscript and react",
   "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.module.js",
-  "exports": "./dist/index.modern.js",
+  "main": "dist/main.js",
+  "module": "dist/module.js",
+  "types": "dist/types.d.ts",
   "source": "src/index.ts",
-  "types": "dist/index.d.ts",
   "scripts": {
     "prepack": "npm run build",
-    "build": "microbundle -f es,modern src/index.ts && microbundle -f cjs,umd src/index.cjs.ts"
+    "build": "parcel build"
   },
   "publishConfig": {
     "access": "public"
@@ -21,15 +20,30 @@
     "type": "git",
     "url": " git://github.com/UW-Macrostrat/hyper.git"
   },
-  "devDependencies": {
-    "microbundle": "^0.13.3"
-  },
   "peerDependencies": {
     "@types/react": ">= 16.0.0 < 20.0.0",
     "react": ">= 0.12.0 < 20.0.0"
   },
   "dependencies": {
-    "classnames": "^2.3.1"
+    "classnames": "^2.5.1"
+  },
+  "exports": {
+    ".": {
+      "typescript": "./src",
+      "import": "./dist/module.js",
+      "require": "./dist/main.js"
+    },
+    "./dist/": {
+      "import": "./dist/",
+      "require": "./dist/"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "devDependencies": {
+    "parcel": "^2.12.0"
   },
   "prettier": {}
 }
