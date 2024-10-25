@@ -1,7 +1,7 @@
 {
   "name": "@macrostrat/hyper",
-  "version": "3.0.0-beta.3",
-  "description": "A helper library for hyperscript and react",
+  "version": "3.0.0",
+  "description": "Macrostrat's hyperscript alternative to JSX",
   "main": "dist/hyper.cjs",
   "module": "dist/hyper.mjs",
   "types": "dist/types.d.ts",
