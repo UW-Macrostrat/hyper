@@ -1,20 +1,11 @@
 import hyperScript from "./react-hyperscript";
-import { HyperBase } from "./types";
+import type { Hyper, HyperStyled, Styles, HyperBase } from "./types";
 import React, { ReactElement, isValidElement } from "react";
 
-export interface Styles {
-  [k: string]: string;
-}
+export type { Hyper, HyperStyled, Styles };
 
 export interface Props {
   [attr: string]: any;
-}
-
-// TODO: this is almost the same interfaces as our base hyperscript type now, maybe we should merge them?
-interface Hyper extends HyperBase {
-  styled(v: Styles): Hyper;
-  styles(): Styles | null;
-  if(v: boolean): Hyper;
 }
 
 function applyStyles(
@@ -100,10 +91,10 @@ function createHyper(styles = {}): Hyper {
 
 const hyper = createHyper();
 
-const hyperIf = hyper.if;
-const hyperStyled = hyper.styled;
-
 export default hyper;
+
+export const hyperIf = hyper.if;
+export const hyperStyled = hyper.styled;
+
 export { compose, C } from "./compose";
 export { classed, addClassNames } from "./classed";
-export { hyperIf, hyperStyled, Hyper };

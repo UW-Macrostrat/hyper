@@ -1,18 +1,21 @@
 import {
   ReactNode,
-  ReactElement,
   ComponentType,
   FunctionComponent,
   Ref,
-  ReactFragment,
 } from "react";
 
 // Directly integrate types from react-hyperscript
 
-type Element = ReactNode | string | number | null;
+type Node = ReactNode | string | number | null;
 type Properties = {
   [key: string]: any;
 };
+
+
+export interface Styles {
+  [k: string]: string;
+}
 
 export type ExtraParams = {
   ref?: Ref<any>;
@@ -23,18 +26,30 @@ export type ExtraParams = {
 
 type Component<P = any> = ComponentType<P> | FunctionComponent<P> | string;
 
+type Children = ReadonlyArray<Node> | Node;
+
 export interface HyperBase {
   // Function with one or two arguments
   (
     componentOrTag: Component,
-    children?: ReadonlyArray<Element> | Element
-  ): ReactElement;
+    children?: Children
+  ): ReactNode;
   // Function with three arguments, with one being props
   <P extends Properties>(
     componentOrTag: Component<P>,
     properties: (P | Omit<P, "children">) & ExtraParams,
-    children?: ReadonlyArray<Element> | Element
-  ): ReactElement<P>;
+    children?: Children
+  ): ReactNode<P>;
   // Function with one list of elements -> React fragment
-  (children?: ReadonlyArray<Element>): ReactFragment;
+  (children?: ReadonlyArray<Node>): ReactNode[];
 }
+
+
+export interface Hyper extends HyperBase {
+  styled(v: Styles): Hyper;
+  styles(): Styles | null;
+  if(v: boolean): Hyper;
+}
+
+export type HyperStyled = Styles & Hyper;
+

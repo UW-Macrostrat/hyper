@@ -1,16 +1,14 @@
 {
   "name": "@macrostrat/hyper",
-  "version": "2.2.1",
-  "description": "A helper library for hyperscript and react",
-  "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.module.js",
-  "exports": "./dist/index.modern.js",
+  "version": "3.0.0",
+  "description": "Macrostrat's hyperscript alternative to JSX",
+  "main": "dist/hyper.cjs",
+  "module": "dist/hyper.mjs",
+  "types": "dist/types.d.ts",
   "source": "src/index.ts",
-  "types": "dist/index.d.ts",
   "scripts": {
     "prepack": "npm run build",
-    "build": "microbundle -f es,modern src/index.ts && microbundle -f cjs,umd src/index.cjs.ts"
+    "build": "parcel build"
   },
   "publishConfig": {
     "access": "public"
@@ -19,17 +17,37 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": " git://github.com/UW-Macrostrat/hyper.git"
-  },
-  "devDependencies": {
-    "microbundle": "^0.13.3"
+    "url": " https://github.com/UW-Macrostrat/hyper.git"
   },
   "peerDependencies": {
-    "react": ">= 0.12.0 < 19.0.0",
-    "@types/react": ">= 16.0.0 < 19.0.0"
+    "react": ">= 0.12.0 < 20.0.0"
   },
   "dependencies": {
-    "classnames": "^2.3.1"
+    "@types/classnames": "^2.3.4",
+    "@types/react": ">= 16.0.0 < 20.0.0",
+    "classnames": "^2.5.1"
+  },
+  "exports": {
+    ".": {
+      "typescript": "./src",
+      "import": "./dist/hyper.mjs",
+      "require": "./dist/hyper.cjs",
+      "types": "./dist/types.d.ts"
+    },
+    "./dist/": {
+      "import": "./dist/",
+      "require": "./dist/"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "devDependencies": {
+    "@parcel/packager-ts": "2.12.0",
+    "@parcel/transformer-typescript-types": "2.12.0",
+    "parcel": "^2.12.0",
+    "typescript": "^5.6.3"
   },
   "prettier": {}
 }
