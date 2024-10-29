@@ -1,5 +1,5 @@
 import hyperScript from "./react-hyperscript";
-import type { Hyper, HyperStyled, Styles, HyperBase } from "./types";
+import type { Hyper, HyperStyled, Styles, HyperBase  } from "./types";
 import React, { ReactElement, isValidElement } from "react";
 
 export type { Hyper, HyperStyled, Styles };
