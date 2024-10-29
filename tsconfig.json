@@ -1,8 +1,12 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "lib": ["es2017"],
-    "typeRoots": ["node_modules/@types"],
+    "lib": ["ES2017"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
   },
-  "include": ["src"]
+  "include": ["src"],
+
 }

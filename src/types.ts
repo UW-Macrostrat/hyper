@@ -1,13 +1,12 @@
 import {
   ReactNode,
   ComponentType,
-  FunctionComponent,
+  ExoticComponent,
+  Component,
+  ReactElement,
   Ref,
 } from "react";
 
-// Directly integrate types from react-hyperscript
-
-type Node = ReactNode | string | number | null;
 type Properties = {
   [key: string]: any;
 };
@@ -24,24 +23,22 @@ export type ExtraParams = {
   attributes?: { [key: string]: any };
 };
 
-type Component<P = any> = ComponentType<P> | FunctionComponent<P> | string;
-
-type Children = ReadonlyArray<Node> | Node;
+type AnyComponent<P = any> = ComponentType<P> | ExoticComponent<P> | Component<P> | string;
 
 export interface HyperBase {
   // Function with one or two arguments
   (
-    componentOrTag: Component,
-    children?: Children
-  ): ReactNode;
+    componentOrTag: AnyComponent,
+    children?: ReactNode
+  ): ReactElement<any, any> | null;
   // Function with three arguments, with one being props
   <P extends Properties>(
-    componentOrTag: Component<P>,
+    componentOrTag: AnyComponent<P>,
     properties: (P | Omit<P, "children">) & ExtraParams,
-    children?: Children
-  ): ReactNode<P>;
+    children?: ReactNode
+  ): ReactElement<any, any> | null;
   // Function with one list of elements -> React fragment
-  (children?: ReadonlyArray<Node>): ReactNode[];
+  (children?: Array<ReactNode>): ReactElement<any, any> | null;
 }
 
 
