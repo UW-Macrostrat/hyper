@@ -5,7 +5,7 @@ export interface Styles {
   [k: string]: string;
 }
 
-type Children = ReactNode[] | number | string;
+type Children = ReactNode | ReactNode[] | number | string;
 
 type HTMLElementType =
   | "a"
