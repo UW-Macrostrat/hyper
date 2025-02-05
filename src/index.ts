@@ -1,6 +1,7 @@
 import hyperScript from "./react-hyperscript";
 import type { Hyper, HyperStyled, Styles, HyperBase  } from "./types";
-import React, { ReactElement, isValidElement } from "react";
+import type { ReactElement, ReactNode } from "react";
+import { isValidElement } from "react";
 
 export type { Hyper, HyperStyled, Styles };
 
@@ -9,9 +10,9 @@ export interface Props {
 }
 
 function applyStyles(
-  element: React.ReactElement<any>,
+  element: ReactElement<any>,
   styles: Styles
-): React.ReactNode {
+): ReactNode {
   const { props } = element;
   const { className } = props;
   if (className == null) {
@@ -51,7 +52,7 @@ function createNoOpHyper(): Hyper {
   return _hyper as Hyper;
 }
 
-const hyperCore: HyperBase = function (...args): ReactElement {
+const hyperCore: HyperBase = function (...args) {
   if (args.length === 2 && isValidElement(args[1])) {
     // Special case where a single child element is passed
     return hyperScript(args[0], null, args[1]);

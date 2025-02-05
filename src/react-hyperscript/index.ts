@@ -1,12 +1,12 @@
 "use strict";
-import React from "react";
 import parseTag from "./parse-tag";
 import { HyperBase } from "../types";
+import { Fragment, createElement } from "react";
 
 function h(componentOrTag, properties, children) {
   // if only one argument which is an array, wrap items with React.Fragment
   if (arguments.length === 1 && Array.isArray(componentOrTag)) {
-    return h(React.Fragment, null, componentOrTag);
+    return h(Fragment, null, componentOrTag);
   } else if (!children && isChildren(properties)) {
     // If a child array or text node are passed as the second argument, shift them
     children = properties;
@@ -46,8 +46,8 @@ function h(componentOrTag, properties, children) {
   }
 
   // Create the element
-  var args = [componentOrTag, properties].concat(children);
-  return React.createElement.apply(React, args);
+  //var args = [componentOrTag, properties].concat(children);
+  return createElement(componentOrTag, properties, children);
 }
 
 function isChildren(x) {
