@@ -264,25 +264,25 @@ export interface HyperBase {
 
   <P extends {}>(
     component: React.FunctionComponent<P>,
-    props?: P & React.Attributes,
+    props?: (P | Omit<P,"children">) & React.Attributes,
     children?: Children,
   ): React.FunctionComponentElement<P>;
 
   <P extends {}>(
     component: React.ClassType<P, React.ClassicComponent<P, React.ComponentState>, React.ClassicComponentClass<P>>,
-    props?: P & React.ClassAttributes<React.ClassicComponent<P, React.ComponentState>>,
+    props?: (P | Omit<P,"children">) & React.ClassAttributes<React.ClassicComponent<P, React.ComponentState>>,
     children?: Children,
   ): React.ComponentElement<P, React.ClassicComponent<P, React.ComponentState>>;
 
   <P extends {}, T extends React.Component<P, React.ComponentState>>(
     component: React.ClassType<P, T, React.ComponentClass<P>>,
-    props?: P & React.ClassAttributes<T>,
+    props?: (P | Omit<P,"children">) & React.ClassAttributes<T>,
     children?: Children,
   ): React.ComponentElement<P, T>;
 
   <P extends {}>(
     component: React.FunctionComponent<P> | React.ComponentClass<P> | string,
-    props?: P & React.Attributes,
+    props?: (P | Omit<P,"children">) & React.Attributes,
     children?: Children,
   ): ReactElement<P>;
 }

@@ -1,6 +1,6 @@
 {
   "name": "@macrostrat/hyper",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "Macrostrat's hyperscript alternative to JSX",
   "main": "dist/hyper.cjs",
   "module": "dist/hyper.mjs",
