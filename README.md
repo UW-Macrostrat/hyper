@@ -116,6 +116,10 @@ is run. Prefer to run this outside of the render loop where possible.
 
 # Changelog
 
+## Version `3.0.6` (February 2025)
+
+- Update types
+
 ## Version `2.2.1` (June 2022)
 
 - Export Hyper type by default.
