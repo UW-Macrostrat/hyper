@@ -119,6 +119,8 @@ is run. Prefer to run this outside of the render loop where possible.
 ## Version `3.0.6` (February 2025)
 
 - Update types
+- Fix an error introduced in `3.0.5`
+- Create an examples app
 
 ## Version `2.2.1` (June 2022)
 

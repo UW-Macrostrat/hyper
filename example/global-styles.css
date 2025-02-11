@@ -1,0 +1,32 @@
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  margin: 2em;
+}
+
+.example {
+  margin: 1em 0 2em;
+  h1 {
+    color: #444;
+    font-size: 1.2em;
+  }
+
+  .description {
+    font-size: 0.9em;
+    font-style: italic;
+  }
+
+  .example-content {
+    border: 1px solid #ccc;
+    padding: 1em;
+    border-radius: 4px;
+  }
+}
+
+.styled-div {
+  color: saddlebrown;
+}
+
+.another-class {
+  text-decoration: underline;
+}
