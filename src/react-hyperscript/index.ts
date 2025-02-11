@@ -46,8 +46,8 @@ function h(componentOrTag, properties, children) {
   }
 
   // Create the element
-  //var args = [componentOrTag, properties].concat(children);
-  return createElement(componentOrTag, properties, children);
+  const args = [componentOrTag, properties].concat(children);
+  return createElement.apply(null, args);
 }
 
 function isChildren(x) {

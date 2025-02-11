@@ -184,41 +184,42 @@ type SVGElementType =
   | "use"
   | "view";
 
-
 export interface HyperBase {
-  (
-    children?: Children,
-  ): ReactElement;
+  (children?: Children): ReactElement;
 
-// dom elements without attributes
+  // dom elements without attributes
 
   (
     tag: "input",
     children?: Children,
-  ): React.DetailedReactHTMLElement<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+  ): React.DetailedReactHTMLElement<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >;
 
   <T extends HTMLElement>(
     tag: HTMLElementType,
     children?: Children,
   ): React.DetailedReactHTMLElement<React.HTMLAttributes<T>, T>;
 
-  (
-    tag: SVGElementType,
-    children?: Children,
-  ): ReactSVGElement;
+  (tag: SVGElementType, children?: Children): ReactSVGElement;
 
   <T extends Element>(
     tag: string,
     children?: Children,
   ): React.DOMElement<React.DOMAttributes<T>, T>;
 
-// dom elements with attributes
+  // dom elements with attributes
 
   (
     tag: "input",
-    attributes?: React.ClassAttributes<HTMLInputElement> & React.InputHTMLAttributes<HTMLInputElement>,
+    attributes?: React.ClassAttributes<HTMLInputElement> &
+      React.InputHTMLAttributes<HTMLInputElement>,
     children?: Children,
-  ): React.DetailedReactHTMLElement<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+  ): React.DetailedReactHTMLElement<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >;
 
   <T extends HTMLElement, P extends React.HTMLAttributes<T>>(
     tag: HTMLElementType,
@@ -238,7 +239,7 @@ export interface HyperBase {
     children?: Children,
   ): React.DOMElement<P, T>;
 
-// react components without props
+  // react components without props
 
   <P extends {}>(
     component: React.FunctionComponent<P>,
@@ -246,7 +247,11 @@ export interface HyperBase {
   ): React.FunctionComponentElement<P>;
 
   <P extends {}>(
-    component: React.ClassType<P, React.ClassicComponent<P, React.ComponentState>, React.ClassicComponentClass<P>>,
+    component: React.ClassType<
+      P,
+      React.ClassicComponent<P, React.ComponentState>,
+      React.ClassicComponentClass<P>
+    >,
     children?: Children,
   ): React.ComponentElement<P, React.ClassicComponent<P, React.ComponentState>>;
 
@@ -260,29 +265,34 @@ export interface HyperBase {
     children?: Children,
   ): ReactElement<P>;
 
-// react components with props
+  // react components with props
 
   <P extends {}>(
     component: React.FunctionComponent<P>,
-    props?: (P | Omit<P,"children">) & React.Attributes,
+    props?: (P | Omit<P, "children">) & React.Attributes,
     children?: Children,
   ): React.FunctionComponentElement<P>;
 
   <P extends {}>(
-    component: React.ClassType<P, React.ClassicComponent<P, React.ComponentState>, React.ClassicComponentClass<P>>,
-    props?: (P | Omit<P,"children">) & React.ClassAttributes<React.ClassicComponent<P, React.ComponentState>>,
+    component: React.ClassType<
+      P,
+      React.ClassicComponent<P, React.ComponentState>,
+      React.ClassicComponentClass<P>
+    >,
+    props?: (P | Omit<P, "children">) &
+      React.ClassAttributes<React.ClassicComponent<P, React.ComponentState>>,
     children?: Children,
   ): React.ComponentElement<P, React.ClassicComponent<P, React.ComponentState>>;
 
   <P extends {}, T extends React.Component<P, React.ComponentState>>(
     component: React.ClassType<P, T, React.ComponentClass<P>>,
-    props?: (P | Omit<P,"children">) & React.ClassAttributes<T>,
+    props?: (P | Omit<P, "children">) & React.ClassAttributes<T>,
     children?: Children,
   ): React.ComponentElement<P, T>;
 
   <P extends {}>(
     component: React.FunctionComponent<P> | React.ComponentClass<P> | string,
-    props?: (P | Omit<P,"children">) & React.Attributes,
+    props?: (P | Omit<P, "children">) & React.Attributes,
     children?: Children,
   ): ReactElement<P>;
 }
@@ -294,4 +304,3 @@ export interface Hyper extends HyperBase {
 }
 
 export type HyperStyled = Hyper & Styles;
-

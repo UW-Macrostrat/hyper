@@ -1,5 +1,5 @@
 import hyperScript from "./react-hyperscript";
-import type { Hyper, HyperStyled, Styles, HyperBase  } from "./types";
+import type { Hyper, HyperStyled, Styles, HyperBase } from "./types";
 import type { ReactElement, ReactNode } from "react";
 import { isValidElement } from "react";
 
@@ -9,10 +9,7 @@ export interface Props {
   [attr: string]: any;
 }
 
-function applyStyles(
-  element: ReactElement<any>,
-  styles: Styles
-): ReactNode {
+function applyStyles(element: ReactElement<any>, styles: Styles): ReactNode {
   const { props } = element;
   const { className } = props;
   if (className == null) {
