@@ -116,9 +116,10 @@ is run. Prefer to run this outside of the render loop where possible.
 
 # Changelog
 e
-## Version `3.0.7` (April 2026)
+## Version `3.1.0` (April 2026)
 
-Add a small improvement to types
+- Add a small improvement to types
+- Improve development dependencies
 
 ## Version `3.0.6` (February 2025)
 
