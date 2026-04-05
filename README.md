@@ -115,6 +115,10 @@ is a bad idea, since components will be regenerated each time the function
 is run. Prefer to run this outside of the render loop where possible.
 
 # Changelog
+e
+## Version `3.0.7` (April 2026)
+
+Add a small improvement to types
 
 ## Version `3.0.6` (February 2025)
 

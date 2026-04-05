@@ -1,2 +1,7 @@
 node_modules
 .gitmodules
+.yarn
+.parcel-cache
+.pnp.*
+.idea
+example
