@@ -291,7 +291,11 @@ export interface HyperBase {
   ): React.ComponentElement<P, T>;
 
   <P extends {}>(
-    component: React.FunctionComponent<P> | React.ComponentClass<P> | string,
+    component:
+      | React.FunctionComponent<P>
+      | React.ComponentClass<P>
+      | React.PureComponent<P>
+      | string,
     props?: (P | Omit<P, "children">) & React.Attributes,
     children?: Children,
   ): ReactElement<P>;
